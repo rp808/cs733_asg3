@@ -35,11 +35,12 @@ var vertexColors = [
 var near = 0.3;
 var far = 3.0;
 var radius = 4.0;
-var theta = 0.0;
-var phi = 0.0;
+var theta = -1.0;
+var phi = 0.5;
 var dr = 5.0 * Math.PI/180.0;
 
 var  fovy = 45.0;  // Field-of-view in Y direction angle (in degrees)
+
 var  aspect;       // Viewport aspect ratio
 
 var modelViewMatrixLoc, projectionMatrixLoc;
@@ -85,7 +86,7 @@ window.onload = function init() {
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     aspect =  canvas.width/canvas.height;
-
+    
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
     gl.enable(gl.DEPTH_TEST);
@@ -125,6 +126,7 @@ window.onload = function init() {
     document.getElementById("Button3").onclick = function(){radius *= 2.0;};
     document.getElementById("Button4").onclick = function(){radius *= 0.5;};
     document.getElementById("Button5").onclick = function(){theta += dr;};
+   
     document.getElementById("Button6").onclick = function(){theta -= dr;};
     document.getElementById("Button7").onclick = function(){phi += dr;};
     document.getElementById("Button8").onclick = function(){phi -= dr;};
@@ -137,10 +139,14 @@ var render = function(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     eye = vec3(radius*Math.sin(theta)*Math.cos(phi),
+    
         radius*Math.sin(theta)*Math.sin(phi), radius*Math.cos(theta));
-    modelViewMatrix = lookAt(eye, at , up);
-    projectionMatrix = perspective(fovy, aspect, near, far);
 
+        document.getElementById('eye').innerHTML = eye
+    modelViewMatrix = lookAt(eye, at , up);
+    document.getElementById('model').innerHTML = modelViewMatrix
+    projectionMatrix = perspective(fovy, aspect, near, far);
+    document.getElementById('proj').innerHTML = projectionMatrix
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
 
