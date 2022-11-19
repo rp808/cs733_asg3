@@ -122,11 +122,12 @@ window.onload = function init() {
 // buttons for viewing parameters
 
     document.getElementById("Button1").onclick = function(){near  *= 1.1; far *= 1.1;};
+
     document.getElementById("Button2").onclick = function(){near *= 0.9; far *= 0.9;};
     document.getElementById("Button3").onclick = function(){radius *= 2.0;};
     document.getElementById("Button4").onclick = function(){radius *= 0.5;};
     document.getElementById("Button5").onclick = function(){theta += dr;};
-   
+       
     document.getElementById("Button6").onclick = function(){theta -= dr;};
     document.getElementById("Button7").onclick = function(){phi += dr;};
     document.getElementById("Button8").onclick = function(){phi -= dr;};
